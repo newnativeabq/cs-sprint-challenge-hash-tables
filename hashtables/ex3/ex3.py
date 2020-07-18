@@ -1,10 +1,32 @@
-def intersection(arrays):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
+def _build_keys(array):
+    temp = {}
+    for val in array:
+        temp[val] = 0
+    return temp
 
-    return result
+
+def _is_in_all_sets(val, keysets):
+    test = [val in keys for keys in keysets]
+    return sum(test) == len(keysets)
+
+
+def intersection(arrays):
+
+    # Check for single array
+    if len(arrays) == 1:
+        return arrays[0]
+
+    # Load check set (doesn't matter which array you seed with)
+    keysets = [_build_keys(array) for array in arrays]
+
+    # Check intersection:
+    intersection = []
+    testarr = arrays[0]
+    for val in testarr:
+        if _is_in_all_sets(val, keysets):
+            intersection.append(val)
+        
+    return intersection
 
 
 if __name__ == "__main__":
